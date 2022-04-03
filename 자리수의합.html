@@ -1,0 +1,119 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            //내 풀이
+            function solution(n, arr){
+                //N개의 자연수 
+                //각 자연수의 자릿수의 합 
+                //방법1: string으로 만들어서 이중배열로
+                let max=Number.MIN_SAFE_INTEGER;
+                let answer;
+                for(let a of arr){ 
+                    let str = String(a);
+                    let result=0;
+                    for(let s of str){ 
+                        result += Number(s);
+                    }
+                    if(result > max){ 
+                        max = result;
+                        answer=a;
+                    }else if(result===max){ 
+                        max = result;
+                        answer = Math.max(answer, a)
+       
+                    }
+
+                }
+                return answer;
+                //방법2: 10으로 나누면서 나머지 (너무 복잡: 아마 재귀)
+                //그 합이 최대인 자연수 출력 
+                //방법1: max를 두고 비교하는 식(비슷함)
+                //방법2: 배열로 만들어서 Math.max
+                // 조건: 같으면 원래 숫자가 큰 값을 출력 
+            }
+            
+            let arr=[128, 460, 603, 40, 521, 137, 123];
+            console.log(solution(7, arr));
+        </script>
+    </body>
+</html>
+
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            //내 풀이
+            function solution(n, arr){
+                //N개의 자연수 
+                //각 자연수의 자릿수의 합 
+                //방법1: string으로 만들어서 이중배열로
+                //방법2: 10으로 나누면서 나머지 (너무 복잡: 아마 재귀)
+
+                let answer, max = Number.MIN_SAFE_INTEGER
+                for(let a of arr){ 
+                    let sum=0, tmp = a;
+                    while(tmp){ 
+                        sum += tmp % 10
+                        tmp = Math.floor(tmp/10)
+                    }
+                    if(sum > max){ 
+                        max = sum;
+                        answer = a
+                    }else if(sum === max){ 
+                        answer = Math.max(answer, a)
+                        //if(x > answer) answer = x;
+                    }
+                }
+
+                return answer; 
+                //그 합이 최대인 자연수 출력 
+                //방법1: max를 두고 비교하는 식(비슷함)
+                //방법2: 배열로 만들어서 Math.max
+                // 조건: 같으면 원래 숫자가 큰 값을 출력 
+            }
+            
+            let arr=[128, 460, 603, 40, 521, 137, 123];
+            console.log(solution(7, arr));
+        </script>
+    </body>
+</html>
+
+
+
+ <html> 
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            //쌤 풀이
+            function solution(n, arr){
+                let answer, max=Number.MIN_SAFE_INTEGER;
+                for(let x of arr){
+                    let sum=x.toString().split('').reduce((a, b)=>a+Number(b), 0);
+                    //반복문 안 돌리고 reduce로 한번에 : reduce 생활화!!
+                    if(sum>max){
+                        max=sum;
+                        answer=x;
+                    }
+                    else if(sum===max){
+                        if(x>answer) answer=x;
+                        //이 경우에 대해서만 변수가 생기니까
+                    }
+                }
+                return answer;
+            }
+            
+            let arr=[128, 460, 603, 40, 521, 137, 123];
+            console.log(solution(7, arr));
+        </script>
+    </body> 
