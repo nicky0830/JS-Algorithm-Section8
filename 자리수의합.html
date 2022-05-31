@@ -12,7 +12,7 @@
                 //방법1: string으로 만들어서 이중배열로
                 let max=Number.MIN_SAFE_INTEGER;
                 let answer;
-                for(let a of arr){ 
+                for(let a of arr){  
                     let str = String(a);
                     let result=0;
                     for(let s of str){ 
@@ -24,7 +24,6 @@
                     }else if(result===max){ 
                         max = result;
                         answer = Math.max(answer, a)
-       
                     }
 
                 }
@@ -36,8 +35,8 @@
                 // 조건: 같으면 원래 숫자가 큰 값을 출력 
             }
             
-            let arr=[128, 460, 603, 40, 521, 137, 123];
-            console.log(solution(7, arr));
+            let arr1=[128, 460, 603, 40, 521, 137, 123];
+            console.log(solution(7, arr1));
         </script>
     </body>
 </html>
@@ -66,7 +65,7 @@
                     }
                     if(sum > max){ 
                         max = sum;
-                        answer = a
+                        answer = a;
                     }else if(sum === max){ 
                         answer = Math.max(answer, a)
                         //if(x > answer) answer = x;
@@ -80,8 +79,8 @@
                 // 조건: 같으면 원래 숫자가 큰 값을 출력 
             }
             
-            let arr=[128, 460, 603, 40, 521, 137, 123];
-            console.log(solution(7, arr));
+            let arr2=[128, 460, 603, 40, 521, 137, 123];
+            console.log(solution(7, arr2));
         </script>
     </body>
 </html>
