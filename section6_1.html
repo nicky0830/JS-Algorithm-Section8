@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s){
+                //스택 : FILO
+                // push, pop 
+                // 들어간 괄호의 방향 만큼 +, 반대 방향 만큼 - (반대 방향 시작했다가 0이되기 전에 다시 원래 방향 되면 false)
+                // - - + + - + 
+                // --+- (연속 : 0이 될때까지, 안되면 반대로) 
+
+                let answer=[];
+
+                for(let a of s){ 
+                   if(a === '('){ 
+                        answer.push(a)
+                   }else{ 
+                       // if(stack.length===0) return "NO";
+                       answer.pop()
+                   }
+                }
+
+                if(answer.length === 0){ 
+                    return true
+                }else{ 
+                    return false
+                }
+
+            }
+            
+            let a="(()(()))(()";
+            console.log(solution(a));
+        </script>
+    </body>
+</html>
