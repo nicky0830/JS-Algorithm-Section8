@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s){  
+                //push, pop  (')'를 만날 때까지 push, )를 만나면 삭제)
+                let stack=[]; 
+                let letters ='';
+                for(let x of s){ 
+
+                
+
+                    if(x === '('){ 
+                       stack.push(x)
+                    }
+
+                    if(stack.length===0 ){ 
+                        letters+=x;
+                    }
+                    //가운데에 두어야 한다 
+                    //위에 두면 '('를 push하기 전이니까 '('가 들어가고 
+                    //아래에 두면 ')'를 pop한 후니까 ')'가 들어간다
+                    if( x === ')'){ 
+                        stack.pop()
+                    }
+
+                 
+                }
+
+                return letters;
+
+            }
+
+            //쌤 풀이
+            function solution(s){  
+                let answer;
+                let stack=[];
+                for(let x of s){
+                    if(x===')'){
+                        while(stack.pop()!=='(');
+                    }
+                    else stack.push(x);
+                }
+                answer=stack.join('');
+                return answer;
+            }
+
+
+            let str="(A(BC)D)EF(G(H)(IJ)K)LM(N)";
+            console.log(solution(str));
+        </script>
+    </body>
+</html>
