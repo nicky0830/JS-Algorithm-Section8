@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            //잘못된 풀이 (중복된 값이 있으면 안될 수도 있음)
+            function solution(need, plan){
+                //필수과목, 반드시, 순서
+                
+                let str =plan;
+                for(let n of need){ 
+                    let i = plan.indexOf(n); 
+                    if(i === -1){ 
+                        return 'NO';
+                    }
+                    str = str.slice(i+1)
+                }
+                return 'YES'
+            }
+
+            function solution(need, plan){
+                //stack, queue
+                //아니면 index를 구하면 되지 않나
+                let arr = []; 
+                let answer = "YES"
+
+                for(let n of need){ 
+                    let i = plan.indexOf(n); 
+                    arr.push(i)
+                }
+
+                let sorted = arr.slice().sort()
+                //sort는 mutable
+        
+                for(let j=0; j<arr.length; j++){ 
+                    if(sorted[j] !== arr[j]){ 
+                       answer= 'NO'
+                    }
+                }
+                return answer;
+            }
+
+            function solution(need, plan){
+                let answer="YES";
+                let queue=need.split('');
+                //[C, B, A]
+                for(let x of plan){
+                    //C B D A G E
+                    //plan을 기준으로 찾는다
+                    //다 포함이 되어도 순서가 다르면 안되니까
+                    if(queue.includes(x)){
+                        if(x!==queue.shift()) return "NO";
+                        //같이 빠진다
+                        //같을 때 빼버리기
+                        //포함할 때 
+                    }
+                }
+                if(queue.length>0) return "NO";  
+                //a중에 남은 게 있으면 안된다
+                //a를 기준으로 안하고 b를 기준으로 하는 이유
+                return answer;
+            }
+
+         
+
+
+
+            let a="CBA";
+            let b="CBDAGE";
+            console.log(solution(a, b));
+        </script>
+    </body>
+</html>
