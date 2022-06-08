@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(meeting){
+                //1개에 n개의 회의들
+                //각 회의에 대해 시작시간-끝시간
+                //각 회의가 겹치지 않게 하면서 회의실을 사용할 수 있는 최대 수의 회의를 찾아라
+
+                //뒤 - 앞이 같은 것들의 최대 개수
+
+                //1) 1번째와 같은 0번째 원소 찾기  (후보들)
+                // 4 3 5 
+                // 6 5 7
+                //   7
+
+                //2) 다시 찾은 애들의 1번째를 가지고 0번째 찾기 
+                // 재귀 함수 
+
+
+               let sliced = meeting.slice(); 
+               let count=0;
+              
+                    //결국 1번째와 같은 0번째를 못 찾을 거니까
+            while(count < 3){
+                sliced = sliced.map(el => meeting.filter(el2 => el[1]  === el2[0]))
+                //1번째와 0번째의 비교
+                console.log(sliced)
+                console.log(count)
+                //1번째와
+                count++;
+            }
+
+               //본래 arr 유지하면서 1번째와 같은 0번째를 가진 요소들만 남긴다
+               //1번째가 계속 바뀌고 비교하는 0번째는 그대로이므로 앞에 sliced(el[1]), 뒤에 arr(el2[0])
+               return count;
+
+                //첫번째 for문을 돌면서 0번째
+                //두번째 for문을 돌면서 1번째 
+            }
+
+
+            function solution(meeting){
+                let answer=0;
+                meeting.sort((a, b)=>{
+                    if(a[1]===b[1]) return a[0]-b[0];
+                    //같으면 0을 기준으로
+                    else return a[1]-b[1];
+                    //1을 기준으로 
+                })
+                // 만약에 뒤의 값이 같으면 sort
+                // 다르면 뒤에 따라 sort
+
+
+                let et=0;
+                for(let x of meeting){
+                    if(x[0]>=et){
+                        //요소의 0번째가 et보다 같거나 크면
+                        answer++;
+                        et=x[1];
+                     //x의 1번째 요소를 넣는다(새롭게 비교해야 하는 값)
+                    }
+                }
+                return answer;
+                //변경된 것보다 더 크면 
+            }
+
+            
+
+            let arr=[[1, 4], 
+                     [2, 3],
+                     [3, 5], 
+                     [4, 6], 
+                     [5, 7]];
+            console.log(solution(arr));
+        </script>
+    </body>
+</html>

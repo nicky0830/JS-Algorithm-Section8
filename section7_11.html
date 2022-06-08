@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            
+            function solution(m, songs){
+                //m개로 나눌 때 제한이 같도록 (가장 뒤에 몇개를 더한 게 가장 큰 값)
+                //뒤에서 더하는 것을 기준으로 구해야 할 듯 
+                //데이터를 분석하여 이들 사이에 존재하는 패턴을 예측 가능한 규칙들의 조합으로 나타내며, 그 모양이 ‘나무’와 같다고 해서 의사결정 나무라 부
+                //결정트리는 데이터에 있는 규칙을 통해 데이터셋을 분류/예측하는 지도학습(supervised) 모델
+
+               let q = Math.floor(songs.length/m); //3 (각 배열 안에 들어갈 요소의 개수)
+               let copy = songs.slice();
+               let arr =[];
+               let answer;
+
+               while(copy.length>0){
+               arr.push(copy.slice(0, q).reduce((a,b) => a+b))
+               copy.splice(0,q)
+               }
+
+               answer = Math.max(...arr)
+        
+            }
+
+            function count(songs, capacity){
+                let cnt=1, sum=0;
+                for(let x of songs){
+                    if(sum+x > capacity){ //27
+                        //x = 7
+                        cnt++;//+1(CD)
+                        sum=x;//7로 바꾼다(안넘도록 다음 cd로 넘기는 것)
+                    }
+                    else sum+=x; 
+                    //mid보다 x가 작으면 계속 더한다
+                    //7+8+9 = 24
+                
+                }
+                return cnt; //2 (cd개)
+            }
+            
+            //쌤 풀이
+            function solution(m, songs){
+                //answer의 범위를 찾아야 한다 
+                // 전체 합 > answer > max 값
+
+                let answer;
+                let lt=Math.max(...songs);//가장 큰 수
+                let rt=songs.reduce((a, b)=>a+b, 0);//다 더하기
+                console.log(lt, rt)
+
+                while(lt<=rt){ 
+                    let mid=parseInt((lt+rt)/2); 
+                    //중간 값을 다시 설정
+                    if(count(songs, mid)<=m){ //cd의 개수
+                        answer=mid; 
+                        //일단 가능하니까
+                        rt=mid-1;
+                        //mid를 둘을 더해서 2로 나눈 값으로(더 작은 값으로 나눠도 되니까)
+                    }
+                    else{
+                        lt=mid+1;
+                        //mid를 키우기 위해(CD별 한도를 높이는)
+                    }
+                } 
+                return answer;
+            }
+
+
+            let arr=[1, 2, 3, 4, 5, 6, 7, 8, 9];
+            console.log(solution(3, arr));
+        </script>
+    </body>
+</html>
