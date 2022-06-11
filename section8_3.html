@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(n){
+                //트리 : 부모노드 - 왼자식노드 - 오자식노드 
+                // 부모 - 왼(다) - 오 
+                // 가장 왼쪽 자식 - 오- 부모 // 왼 - 오 - 부모 / 부모 
+
+                let answer1='';
+                function DFS(m){ 
+                    answer += m;//4
+                    if(m*2 < limit){ 
+                        DFS(m*2)
+                    }
+                    answer += m+1;
+                    if((m+1)*2 < limit){ 
+                        DFS((m+1)*2)
+                    }
+
+                }
+            }
+
+            function solution(n){ 
+                let answer="";
+                function DFS(v){
+                    if(v>7) return;
+                    else{
+                        DFS(v*2);//v를 바로 더하기 : 계속 2배를 하고 마지막에 
+                        answer+=(v+' ');
+                        DFS(v*2+1);//1을 더한 걸 더하기 
+
+
+                    }
+                }
+                DFS(n);
+                return answer;
+            }
+
+            console.log(solution(1));
+        </script>
+    </body>
+</html> 
