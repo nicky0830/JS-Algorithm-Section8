@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(n){
+                let answer=0; 
+
+                function dfs(m){
+
+                    if(m===0){ 
+                        return answer;
+                    }
+
+                    let num = m;
+                    let cnt=0;
+
+                    while(num > 1){
+                        //그냥 m을 넣으면 재할당이 안되나?
+                        num = parseInt(num/2); 
+                        cnt++; //2의 지수
+                    }
+
+                    answer+=10**cnt;
+
+                   return dfs(m - 2**cnt)
+                }
+
+                return dfs(n)
+            }
+
+            //쌤 풀이 : 이진법은 2로 나눴을 때의 나머지를 더하는 거니까
+            function solution(n){
+                let answer="";
+                function DFS(n){
+                     if(n===0) return;
+                     else{
+                         DFS(parseInt(n/2)); //2로 나눈 몫
+                         answer+=String(n%2);//answer에 n을 2로 나눈 몫
+                     }
+                }
+                DFS(n);
+                return answer;
+            }
+
+            console.log(solution(11));
+        </script>
+    </body>
+</html>
