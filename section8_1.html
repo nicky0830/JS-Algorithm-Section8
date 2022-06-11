@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(n){
+                //재귀함수 : 자신을 실행하는 함수, 멈추기 위해 예외 case에서 return이 있어야 한다
+                //스택 프레임에 하나씩 쌓이고 실행이 끝날 때마다 하나씩 pop된다
+                // dfs(3) -> dfs(2) -> dfs(1) 
+                // 1 pop -> dfs(2)의 19번째 line ->  2 pop -> dfs(3)의 19번째 라인 -> 3 pop
+                //트리 형태로 뻗어나간다 (0레벨, 1레벨..) 그래서 DFS! 
+
+                function dfs(m){ 
+                    if(m===1){ 
+                        return [1];
+                    }  
+                    return dfs(m-1).concat([m])
+                    //push는 안되는데 concat은 되는 이유가 뭐지
+                } 
+    
+                return dfs(n)
+            }
+
+            console.log(solution(3));
+        </script>
+    </body>
+</html>
