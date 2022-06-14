@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(m, ps, pt){  
+                //얻는 점수, 걸리는 시간 
+                // N개의 문제, M안에
+                // 시간의 합이 M보다 작게 
+                // 점수의 합이 가장 크게
+              let arr=[], max=0, answer=[];;
+              for(let i=0; i<ps.length; i++){ 
+                  arr.push([ps[i], pt[i]])
+              }//점수, 시간 정리한 배열
+
+
+              function DFS(v, score, time){ 
+                   if(time+arr[v][1]>20){ 
+                    answer.push([score, time])
+                    return;
+                   }
+                    if(v === ps.length){
+                          //time은 안 넘었는데 다 돌았으면
+                        answer.push([score, time])
+                        return;
+                      }
+                      else{
+                      DFS(v+1, score, time+arr[v][1])
+                      DFS(v+1, score + arr[v][0], time + arr[v][1])
+                      }
+                      //시간은 더하고 score는 0,X
+              }
+
+              DFS(0, 0, 0)
+              return answer;
+            }
+
+
+            function solution(m, ps, pt){         
+                let answer=Number.MIN_SAFE_INTEGER;
+                let n=ps.length;
+                function DFS(L, sum, time){
+                    if(time>m) return; 
+                    //시간을 넘어버리면 return 한다 (이전까지의 합만 보려고)
+                    //0번째부터 마지막까지 o/x로 파악하고 합을 구하는데 이미 time을 넘어버려서 더 볼 필요 x
+
+                    if(L===n){ 
+                    //끝까지 가서 max값을 구한다: 어차피 for문을 끝까지 돌긴 돌아야 하니까
+                        answer=Math.max(answer, sum);
+                    }
+                    else{
+                        DFS(L+1, sum+ps[L], time+pt[L]);
+                        DFS(L+1, sum, time); // 해당 문제를 포함하지 않을 거면 시간도 포함하면 안됨(이걸 간과)
+                    }   
+                }
+
+                DFS(0, 0, 0);
+                return answer;
+            }
+
+
+            let ps=[10, 25, 15, 6, 7];
+            let pt=[5, 12, 8, 3, 4]
+            console.log(solution(20, ps, pt));
+            //개수, 제한시간
+            //점수 시간
+            //ps pt
+        </script>
+    </body>
+</html>
