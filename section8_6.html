@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(c, arr){
+                //부분집합을 더해서 가장 무거운
+                let sum=0, max = 0; 
+                arr.sort();
+                console.log(arr)
+
+                function DFS(v, sum){ 
+                    if(sum > c){ 
+                        return;
+                    }
+
+                    if(sum > max){ 
+                        max = sum
+                        //이걸 매번 하는 방법
+                    }
+
+                    if(v === arr.length){
+                        return; //다 더한 것(v=arr.length-1까지 더한 것)
+                    //arr.length-1까지만 더하도록
+                    }else{                    
+                    DFS(v+1, sum+arr[v])
+                    DFS(v+1, sum)
+                    }
+                }
+                
+
+                DFS(0,0);
+                return max;
+            }
+
+
+            function solution(c, arr){
+                let answer=Number.MIN_SAFE_INTEGER;
+                let n=arr.length;
+
+                function DFS(L, sum){
+                    if(sum>c) return;
+                    if(L===n){
+                        answer=Math.max(answer, sum);
+                        //마지막에서 비교 : 모든 경우의 수에서 마지막(answer는 계속 재할당)
+                    }
+                    else{
+                        DFS(L+1, sum+arr[L]);
+                        DFS(L+1, sum);
+                    }                  
+                }
+
+                DFS(0, 0);
+                return answer;
+            }
+
+
+            let arr=[81, 58, 42, 33, 61];
+            console.log(solution(259, arr));
+        </script>
+    </body>
+</html>
