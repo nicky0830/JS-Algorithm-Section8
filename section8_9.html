@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(m, arr){
+
+                arr.sort((a,b) => b-a)
+           
+                let answer =Array.from({length : arr.length}, ()=> 0)
+             
+                function DFS(v){ 
+                    
+                    while(m - arr[v] >= 0){
+                        answer[v]++; 
+                        m = m -  arr[v];
+                    }
+
+                    if(m>0){
+                        DFS(v+1)
+                    }
+
+                    if(m===0)return;
+                }
+
+                DFS(0)
+               return answer.reduce((a,b)=>a+b)
+
+
+                //가능한 조합을 모두 구고
+                
+         }
+
+         function solution(m, arr){
+                let answer=Number.MAX_SAFE_INTEGER;
+                let n=arr.length;
+
+                function DFS(L, sum){
+                    if(sum>m) return; //합이 더 크면 
+                    console.log(L, sum, answer)
+
+
+                    if(L>=answer) return; //계속 비교
+
+                    if(sum===m){ //같으면 
+                        answer=Math.min(answer, L);//sum이 15가 되어야 갯수를 비교할 수 있으니까 
+                        //answer와 L중에 작은 것
+                    }
+                    else{
+                        for(let i=0; i<n; i++){ //왜 n이 arr.length보다 작은거지
+                            console.log('+',arr[i])
+                            DFS(L+1, sum+arr[i]);//어느것이던 하나 더 쓴 거니까 +1
+                        }
+                    }
+                }
+
+
+                DFS(0, 0);
+                return answer;
+            }
+          
+
+
+ 
+            
+            let arr=[1, 2, 5];
+            console.log(solution(15, arr));
+        </script>
+    </body>
+</html>
